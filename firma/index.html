@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html ng-app="firmaapp">
+<head>
+	<meta charset="utf-8">
+	<title>Dibujando en HTML</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/mdb.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+	<!--[if IE]>
+    	<script type="text/javascript" src="xcanvas.compiled.js"></script>
+	<![endif]-->
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/application.js"></script>
+</head>
+<body ng-controller="firmaCtrl">
+
+<nav class="navbar navbar-inverse elicenciacolor">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#"><b class="navigation-text">eLicencia</b></a>
+		</div>    
+	</div>
+</nav>
+
+<div class="container" id="intro">
+	<h2 class="text-center">Buscar usuario <i class="fa fa-user"></i></h2>
+	<hr>
+	
+	<div class="switch text-center">
+		<label>
+      		Buscar por CURP <i class="fa fa-credit-card"></i>
+			<input type="checkbox" ng-click="changeMode()">
+			<span class="lever"></span>
+			<i class="fa fa-credit-card"></i> Buscar por INE
+		</label>
+	</div>
+	<br>
+	<div class="row" id="ByCurp">
+		<div class="col-sm-12">
+			<form ng-submit="getByCurp()">
+			 	<div class="form-group">
+					<label for="curp">Buscar por CURP: </label>
+					<input type="text" class="texto form-control" id="curp" ng-model="LUSUCUR">
+				</div>
+				<div class="form-group text-center">
+					<button type="submit" class="btn btn-default elicenciacolor">Buscar por CURP<i class="fa fa-search"></i></button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row" id="ByINE">
+		<div class="col-sm-12">
+			<form ng-submit="getByINE()">
+			 	<div class="form-group">
+					<label for="ine">Buscar por INE: </label>
+					<input type="text" class="texto form-control" id="ine" ng-model="LUSUINE">
+				</div>
+				<div class="form-group text-center">
+					<button type="submit" class="btn btn-default elicenciacolor">Buscar por INE<i class="fa fa-search"></i></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="container" id="data-user">
+	<div class="col-sm-12">
+		<!--a href="#"><i class="fa fa-arrow-left fa-2x"></i></a>
+		<h3 class="text-center">Datos de {{user.LUSUCUR}}</h3-->
+		<h4 class="text-center">
+			<a href="javascript:void(0)" ng-click="back()" style="float:left;"><i class="fa fa-arrow-left"></i></a>
+			La búsqueda por 
+			<b ng-if="mode == 0">CURP de <em style="text-decoration: underline;">{{user.LUSUCUR}}</em>,</b>
+			<b ng-if="mode == 1">INE de <em style="text-decoration: underline;">{{user.LUSUINE}}</em>,</b> obtuvo los siguientes datos: 
+		</h4>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm-12" style="margin-top:20px;">
+			<div class="col-sm-4 text-data">
+				<i class="fa fa-user"></i> Nombre Completo: {{user.LUSUNOC}}
+			</div>
+			<div class="col-sm-4 text-data">
+				<i class="fa fa-credit-card"></i> CURP: {{user.LUSUCUR}}
+			</div>
+			<div class="col-sm-4 text-data">
+				<i class="fa fa-tag"></i> RFC: {{user.LUSURFC}}
+			</div>
+		</div>
+		<hr>
+		<div class="col-sm-12" style="margin-top:20px;">
+			<div class="col-sm-4 text-data">
+				<i class="fa fa-credit-card"></i> INE: {{user.LUSUINE}}
+			</div>
+			<div class="col-sm-4 text-data">
+				<i class="fa fa-envelope"></i> Email: {{user.LUSUEMA}}
+			</div>
+			<div class="col-sm-4 text-data">
+				<i class="fa fa-mobile"></i> Telefono Celular: {{user.LUSUCEL}}
+			</div>
+		</div>
+		<hr>
+		<div class="col-sm-12" style="margin-top:20px;">
+			<div class="col-sm-4 text-data">
+				<i class="fa fa-map-marker"></i> Dirección: {{user.LUSUDIR}}	
+			</div>
+		</div>
+	</div>
+	<button id="btnConfirm" class="btn btn-default elicenciacolor" ng-click="firmOptions(1)">Si, Son mis registros <i class="fa fa-thumbs-up"></i></button>
+</div>
+
+<div class="container" id="signing"><!--firma == signing-->
+	<hr>
+	<h4 class="text-center">Para Terminar Proporcione su poderosa {{user.LUSUNOC}} ;-)</h4>
+	<div class="jumbotron">
+		<div id="main" role="main">
+			<canvas id="canvas" width="100" height="100">Su navegador no soporta canvas - HTML5</canvas>			
+		</div>
+	</div>
+	<div id="buttons">
+		<button class="btn btn-red" ng-click="again()">Intentar de nuevo</button>
+		<button class="btn btn-default elicenciacolor" ng-click="saveFirma()">Guardar Firma</button>
+	</div>
+</div>	
+<br><br><br>
+</body>
+</html>
