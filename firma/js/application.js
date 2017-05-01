@@ -232,13 +232,30 @@ app.controller('firmaCtrl', function($scope, $http){
 
 	$scope.again = function(){
 		alert("again");
-		movimientos = new Array();
-		repaint();
+		//movimientos = new Array();
+		//repaint();
 	}
 
-	$scope.saveFirma = function(){
+	/*$scope.saveFirma = function(){
 		canvas = document.getElementById("canvas");
 		alert("img "+canvas.toDataURL());
+	}*/
+	
+	$scope.saveFirma = function(){
+		canvas = document.getElementById("canvas");
+		//alert("img "+canvas.toDataURL());
+		var data = {
+			id: $scope.user._id,
+			LUSUFIR: canvas.toDataURL() 
+		};
+		$http.post(url_server+'apiu/addFirm', data ).then(function(response){
+			if(response.data.status){
+				alert("Firma enviada");
+			}else{
+				alert("Error al agregar la firma");
+			}
+		});
 	}
+
 
 });
