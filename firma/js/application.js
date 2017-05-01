@@ -61,7 +61,8 @@
 
 var app = angular.module('firmaapp', []);
 //var url_server = "http://127.0.0.1:8080/";
-var url_server = "http://192.168.0.102:8080/";
+//var url_server = "http://192.168.0.102:8080/";
+var url_server = "http://192.168.1.104:8080/";
 
 /*app.config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
